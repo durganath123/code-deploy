@@ -1,0 +1,15 @@
+{% extends '/home/admin1/Desktop/Durganath/django/chatpr/chatReg/templates/index.html' %}
+
+    {% block content %}
+    <h1>Welcome Mr. {{user.username}} </h1>
+    {% if user.is_authenticated %}
+
+    <button><a href="{% url 'logout' %}">Logout</a></button>
+    {% else %}
+        <button><a href="{% url 'register_url' %}">Register</a></button>
+        <button><a href="{% url 'login_url' %}">Login</a></button>
+
+{% endif %}
+
+
+{% endblock  %}

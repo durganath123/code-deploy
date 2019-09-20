@@ -1,0 +1,103 @@
+<!-- chat/templates/chat/index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+
+    <title>Chat Rooms</title>
+
+    <style>
+            .header {
+              background-color: #f1f1f1;
+              padding: 20px;
+              text-align: center;
+            }
+    </style>
+        <style>
+                .box {
+                  background-color: #f1f1f1;
+                  padding: 10px;
+                 
+                }
+        </style>
+    <style>
+            .buttonEnter {
+                border: #44992a;
+                border-radius: 10px;
+                
+                background-color: gray;
+                padding: 10px 395px;
+                text-align: center;
+            }
+            .buttonEnter:hover{
+                border: #44992a;
+                border-radius: 10px;
+                
+                background-color: #44992a;
+                padding: 10px 395px;
+                text-align: center; 
+            }
+
+            .logoutLblPos{
+
+                position:fixed;
+                right:10px;
+                top:40px;
+                }
+    </style>
+    <style>
+             .buttonLogout {
+                border: #24381e;
+                border-radius: 10px;
+                text-decoration-color: #f1f1f1;
+                
+                padding: 10px 39px;
+                text-align: center;
+            }
+            
+    </style>
+
+
+
+
+</head>
+<body>
+        {% block content %}
+    <h1 class="header">Welcome Mr. {{user.username}} </h1>
+<center>
+
+   <h3 >Enter the name of  chat_room  : </h3> <br/>
+
+    <input class="box" id="room-name-input" type="text" size="100"/><br/>
+    <p> </p>
+    <input class="buttonEnter" id="room-name-submit" type="button" value="Enter" /><br>
+    <p> </p>
+    <button class="buttonLogout logoutLblPos"><a href="{% url 'logout' %}">Logout</a></button>
+
+</center>
+
+    <script>
+        document.querySelector('#room-name-input').focus();
+        document.querySelector('#room-name-input').onkeyup = function(e) {
+            if (e.keyCode === 13) {  // enter, return
+                document.querySelector('#room-name-submit').click();
+            }
+        };
+
+        document.querySelector('#room-name-submit').onclick = function(e) {
+            var roomName = document.querySelector('#room-name-input').value;
+            var rExp=/[a-z]/;
+            var result = roomName.match(rExp);
+            if (!result) {
+                alert("Please enter a room name !!");
+             }
+             else{
+            
+            window.location.pathname = '/chat/' + roomName + '/';
+        }};
+      
+    </script>
+
+{% endblock  %}
+</body>
+</html>

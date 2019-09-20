@@ -1,0 +1,23 @@
+{% extends 'index.html' %}
+
+
+{% block content %}
+<center>
+<h1> Login  </h1>
+
+<form method="POST">
+
+    
+    {% csrf_token %}
+    {{ form.as_p}}
+
+
+    <BUtton>Login</BUtton><br>
+</form>
+<p></p>
+
+Forgot passowrd??<button><a href="{% url 'password_reset' %}">Reset now</a></button><br>
+Dont you have an account yet?? <button><a href="{% url 'register_url' %}">Register</a></button>
+
+</center>
+{% endblock %}

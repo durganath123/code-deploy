@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <style>
+                .buttonLogout {
+                   border: #c0cabd;
+                   border-radius: 10px;
+                   text-decoration-color: aqua;
+                   padding: 5px 39px;
+                   text-align: center;
+               }
+               .buttonEnter {
+                border: #44992a;
+                border-radius: 10px;
+                
+                background-color: gray;
+                padding: 10px 395px;
+                text-align: center;
+            }
+            .buttonEnter:hover{
+                border: #44992a;
+                border-radius: 10px;
+                
+                background-color: #44992a;
+                padding: 10px 395px;
+                text-align: center; 
+            }
+
+            .logoutLblPos{
+
+                position:fixed;
+                right:10px;
+                top:45px;
+                }
+               .buttonLogout:hover{
+                   border: #6b3030;
+                   border-radius: 10px;
+                   text-decoration-color: aqua;
+                   
+                   padding: 5px 39px;
+                   text-align: center; 
+               }
+       </style>
+        <style>
+                .header {
+                  background-color: #f1f1f1;
+                  padding: 20px;
+                  text-align: center;
+                }
+
+
+            .centerDiv {
+                width: 500px;
+
+                position: fixed;
+                right: 25%;
+                left: 25%;
+                
+
+                background-color: #F1F1F1;
+             }
+
+
+        </style>
+    <meta charset="utf-8"/>
+    <title>Chat Room</title>
+</head>
+<body>
+    
+    <h1 class="header">Welcome Mr. {{user.username}} </h1>
+   
+    <center> <textarea id="chat-log" cols="100" rows="10"></textarea><br/>
+            <table id="myTable">
+                    <tr>
+                      <td></td>
+                      
+                    </tr>
+                    
+                  </table>
+            <p></p>
+            <form method="POST" id="myForm" >
+                    {% csrf_token %}
+                   
+                    {{ AuthorTextArea.msg }}
+
+                    {{ AuthorTextArea.as_p }}
+              <!-- <input id="id_text" type="text" size="100"/><br/> -->
+             <input class="buttonEnter" id="chat-message-submit" type="submit" value="Send" />        
+                    
+               <!-- <input type="submit" value="hh"> -->
+            </form>
+  
+                 
+                   
+    </center>
+</body>
+<script>
+    
+     var roomName = {{ room_name_json }};
+     var cUsername = {{ cUsername }};
+    var db132 = {{ db_msg }};
+    // db132.toString();
+    
+    console.log("hiiiii"+db132)
+    var chatSocket = new WebSocket(
+        'ws://' + window.location.host +
+        '/ws/chat/' + roomName + '/');
+    
+
+    chatSocket.onmessage = function(e ,db132) {
+        var data = JSON.parse(e.data);
+        var message = data['message'];
+        console.log(db132)
+     
+    //    localStorage.setItem('name', document.querySelector('#chat-log').value);
+    //     var name = localStorage.getItem('name');
+        document.querySelector('#chat-log').value += 
+         ( "Message - "+ message +'\n' + myFunction()  +'\n'+'\n' );
+
+        
+    };
+
+    chatSocket.onclose = function(e) {
+        console.error('Chat socket closed unexpectedly');
+    };
+
+    document.querySelector('#id_text').focus();
+    document.querySelector('#id_text').onkeyup = function(e) {
+        if (e.keyCode === 13) {  // enter, return
+            document.querySelector('#chat-message-submit').click();
+        }
+    };
+
+    document.querySelector('#chat-message-submit').onclick = function(e) {
+        var messageInputDom = document.querySelector('#id_text');
+        var message = messageInputDom.value;
+        chatSocket.send(JSON.stringify({
+            'message': message
+        }));
+
+        messageInputDom.value = '';
+    };
+
+    function addZero(i) {
+        if (i < 10) {
+            i = "0" + i;
+        }
+        return i;
+    }
+
+    function myFunction() {
+
+        var d = new Date();
+        
+        var m = addZero(d.getMinutes());
+        var s = addZero(d.getSeconds());
+        var hours = addZero(d.getHours())
+        hours = hours % 12;
+        hours = hours ? hours : 12; 
+        var ctime = "Time - " +hours + ":" + m ;
+        
+        return ctime;
+    }
+
+    function myTableFun() {
+
+    var table = document.getElementById("myTable");
+    var row = table.insertRow(0);
+    var cell1 = row.insertCell(0);
+    
+  
+}
+   
+</script>
+<br>
+<button class="buttonLogout logoutLblPos"><a href="{% url 'logout' %}">Logout</a></button>
+
+</html>

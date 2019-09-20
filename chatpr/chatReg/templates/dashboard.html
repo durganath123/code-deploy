@@ -1,0 +1,24 @@
+{% extends 'index.html' %}
+
+    {% block content %}
+
+    <center>
+    
+    <h1>Welcome Mr. {{ user.first_name }} {{ user.last_name }} </h1>
+    <p>Email:{{user.email}} </p>
+
+    {% if user.is_authenticated %}
+
+    <button><a href="{% url 'chat_index' %}">Get started</a></button>
+
+
+        <button><a href="{% url 'logout' %}">Logout</a></button>
+       
+
+        {% else %}
+            <button><a href="{% url 'register_url' %}">Register</a></button>
+            <button><a href="{% url 'login_url' %}">Login</a></button>
+
+    {% endif %}
+    </center>
+{% endblock  %}
