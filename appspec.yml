@@ -17,10 +17,6 @@ hooks:
     - location: bundle.sh
       timeout: 300
       runas: root
-  BeforeInstall:
-    - location: before.sh
-      timeout: 300
-      runas: root
   Install:
     - location: install.sh
       timeout: 300
