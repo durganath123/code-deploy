@@ -10,15 +10,11 @@ permissions:
     group: ubuntu
 hooks:
   ApplicationStop:
-    - location: stop.sh
-      timeout: 300
-      runas: root
-  DownloadBundle:
-    - location: bundle.sh
+    - location: scripts/stop.sh
       timeout: 300
       runas: root
   Install:
-    - location: install.sh
+    - location: scripts/install.sh
       timeout: 300
       runas: root
   AfterInstall:
@@ -28,6 +24,6 @@ hooks:
   ApplicationStart:
     - location: scripts/app_start.sh
       timeout: 50
-      runas: ubuntu
+      runas: root
 
 
