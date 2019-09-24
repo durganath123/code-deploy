@@ -1,5 +1,5 @@
 #!/bin/bash
-rm -rf /home/ubuntu/*
+
 pip3 install -r requirements.txt
 pip3 install django bcrypt django-extensions
 pip3 install gunicorn
