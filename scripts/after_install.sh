@@ -1,6 +1,4 @@
 #!/bin/bash
-sudo systemctl daemon-reload
-sudo systemctl start gunicorn
-sudo systemctl enable gunicorn
-
-
+# sudo systemctl daemon-reload
+sudo service nginx restart
+sudo service gunicorn restart
