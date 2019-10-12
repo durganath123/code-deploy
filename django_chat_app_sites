@@ -2,10 +2,10 @@ server {
   listen 80;
   location = /favicon.ico { access_log off; log_not_found off; }
   location /static/ {
-      root /home/ubuntu/chatpr;
+      root /home/ubuntu/code/django_chat_app/chatpr;
   }
   location / {
       include proxy_params;
-      proxy_pass http://unix:/home/ubuntu/django_chat_app/chatpr/chatpr.sock;
+      proxy_pass http://unix:/home/ubuntu/code/django_chat_app/chatpr/chatpr.sock;
   }
 }
