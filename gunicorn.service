@@ -4,7 +4,7 @@ After=network.target
 [Service]
 User=ubuntu
 Group=www-data
-WorkingDirectory=/home/ubuntu/django_chat_app/chatpr
-ExecStart=/home/ubuntu/venv/bin/gunicorn --workers 3 --bind unix:/home/ubuntu/django_chat_app/chatpr/chatpr.sock chatpr.wsgi:application
+WorkingDirectory=/home/ubuntu/code/django_chat_app/chatpr
+ExecStart=/home/ubuntu/code/venv/bin/gunicorn --workers 3 --bind unix:/home/ubuntu/code/django_chat_app/chatpr/chatpr.sock chatpr.wsgi:application
 [Install]
 WantedBy=multi-user.target
