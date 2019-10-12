@@ -3,7 +3,7 @@ Description=gunicorn daemon
 After=network.target
 [Service]
 User=ubuntu
-Group=ubuntu
+Group=www-data
 WorkingDirectory=/home/ubuntu/code/django_chat_app/chatpr
 ExecStart=/home/ubuntu/code/venv/bin/gunicorn --workers 3 --bind unix:/home/ubuntu/code/django_chat_app/chatpr/chatpr.sock chatpr.wsgi:application
 [Install]
