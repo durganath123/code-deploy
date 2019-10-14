@@ -78,7 +78,6 @@ DATABASES = {
         'USER': 'mydb',
         'PASSWORD': 'admin123',
         'HOST' :  'mydb.ce4ocbw18ce9.ap-south-1.rds.amazonaws.com'
-'
     }
 }
 
